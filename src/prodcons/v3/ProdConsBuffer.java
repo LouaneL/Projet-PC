@@ -51,7 +51,7 @@ public class ProdConsBuffer implements IProdConsBuffer{
 
 	@Override
 	public int nmsg() {
-		return plein.availablePermits();
+		return vide.availablePermits();
 	}
 
 	@Override

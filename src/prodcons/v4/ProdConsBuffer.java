@@ -7,16 +7,22 @@ import BaseProdConso.IProdConsBuffer;
 import BaseProdConso.Message;
 
 public class ProdConsBuffer implements IProdConsBuffer{
-	private int bufSz;
-	private Message[] buffer;
-	private int in;
-	private int out;
+
+	int nfull;
+	int nempty;
+	Message[] buffer;
+	int bufSz;
+	int in;
+	int out;
+
 	private ReentrantLock lock;
 	private Condition notFull;
 	private Condition notEmpty;
 
 	public ProdConsBuffer(int bufSz) {
 		this.bufSz = bufSz;
+		this.nfull = 0;
+		this.nempty = bufSz;
 		this.buffer = new Message[bufSz];
 		this.in = 0;
 		this.out = 0;
@@ -27,34 +33,42 @@ public class ProdConsBuffer implements IProdConsBuffer{
 
 	public void put(Message m) throws InterruptedException {
 		lock.lock();
-		while (in - out == bufSz) {
+		while(nempty <= 0) {
 			notFull.await();
 		}
 		buffer[in] = m;
 		in = (in + 1) % bufSz;
+		nfull++;
+		nempty--;
 		notEmpty.signal();
-		lock.unlock();
 
+		lock.unlock();
 	}
 
 	public Message get() throws InterruptedException {
 		lock.lock();
-		while (in == out) {
-			notEmpty.await();
+		try {
+			while(nfull <= 0) {
+				notEmpty.await();
+			}
+			Message m = buffer[out];
+			out = (out + 1) % bufSz;
+			nfull--;
+			nempty++;
+			notFull.signal();
+			return m;
+		} finally {
+			lock.unlock();
 		}
-		Message m = buffer[out];
-		out = (out + 1) % bufSz;
-		notFull.signal();
-		lock.unlock();
-		return m;
-
 	}
 
+	@Override
 	public int nmsg() {
-		return in - out;
+		return nempty;
 	}
 
+	@Override
 	public int totmsg() {
-		return in;
+		return nfull;
 	}
 }
