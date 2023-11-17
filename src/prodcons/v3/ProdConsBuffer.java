@@ -6,7 +6,6 @@ import BaseProdConso.IProdConsBuffer;
 import BaseProdConso.Message;
 
 public class ProdConsBuffer implements IProdConsBuffer{
-	
 	private int sizeBuff;
 	private Semaphore plein;
 	private Semaphore vide;
@@ -59,7 +58,5 @@ public class ProdConsBuffer implements IProdConsBuffer{
 	public int totmsg() {
 		return totalM;
 	}
-
-
 
 }

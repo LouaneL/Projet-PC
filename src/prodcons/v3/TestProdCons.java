@@ -11,7 +11,7 @@ public class TestProdCons {
 	
 	public static void main(String[] args) throws InvalidPropertiesFormatException, IOException {
 		Properties prop = new Properties();
-		prop.loadFromXML(TestProdCons.class.getClassLoader().getResourceAsStream("option.xml"));
+		prop.loadFromXML(TestProdCons.class.getClassLoader().getResourceAsStream("./option.xml"));
 		int nProd = Integer.parseInt(prop.getProperty("nProd"));
 		int nCons = Integer.parseInt(prop.getProperty("nCons"));
 		int bufSz = Integer.parseInt(prop.getProperty("bufSz"));

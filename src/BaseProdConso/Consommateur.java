@@ -16,6 +16,7 @@ public class Consommateur extends Thread {
             try {
                 Thread.sleep(consTime);
                 buffer.get();
+                System.out.println("Consommateur " + this.getId() + " consomme");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
