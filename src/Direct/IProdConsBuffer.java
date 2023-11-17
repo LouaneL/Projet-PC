@@ -1,4 +1,4 @@
-package SemaphoreBase;
+package Direct;
 
 public interface IProdConsBuffer {
 	/**
