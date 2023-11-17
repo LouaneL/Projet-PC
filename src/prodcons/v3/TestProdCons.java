@@ -1,10 +1,11 @@
-package BaseProdConso;
+package prodcons.v3;
 
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-import Semaphorebase.ProdConsBuffer;
+import BaseProdConso.Consommateur;
+import BaseProdConso.Producteur;
 
 public class TestProdCons {
 	

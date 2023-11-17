@@ -1,6 +1,6 @@
 package BaseProdConso;
 
-import Semaphorebase.ProdConsBuffer;
+import prodcons.v3.ProdConsBuffer;
 
 public class Consommateur extends Thread {
     private ProdConsBuffer buffer;

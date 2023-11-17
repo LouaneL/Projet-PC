@@ -1,4 +1,4 @@
-package Semaphorebase;
+package prodcons.v3;
 
 import java.util.concurrent.Semaphore;
 
