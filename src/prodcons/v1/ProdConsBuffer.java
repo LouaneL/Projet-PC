@@ -4,18 +4,23 @@ import BaseProdConso.IProdConsBuffer;
 import BaseProdConso.Message;
 
 /* Variables :
- * 		-
- * 		-
- * 
+ * 		- nfull : nombre places prises
+ * 		- nempty : nombre places libres
+ * 		- buffer : tableau de messages
+ * 		- bufSz : taille de buffer
+ * 		- in : index du prochain message à ajouter
+ * 		- out : index du prochain message à retourner
  * 
  * 
  * Tableau de garde-actions:
  * 
- *     Opérations    | Pré-action |  Garde   |    Post-action
- * --------------------------------------------------------------
+ *     Opérations    | Pré-action |  Garde   |                Post-action
+ * ------------------------------------------------------------------------------------------
  * Produce(Message m)|            | nempty>0 | nfull++; nempty--;
- * --------------------------------------------------------------
+ *                   |            |          | buffer[in] = m; in = (in+1)%bufSz; 
+ * ------------------------------------------------------------------------------------------
  * Message Consume   |            | nfull>0  | nfull--; nempty++;
+ *                   |            |          | Message tmp = buffer[out]; out = (out+1)%bufSz;
 */
 
 public class ProdConsBuffer implements IProdConsBuffer {
