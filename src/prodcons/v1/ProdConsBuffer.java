@@ -58,7 +58,6 @@ public class ProdConsBuffer implements IProdConsBuffer {
 			}
 		}
 		Message tmp = buffer[out];
-		buffer[out] = null;
 		out = (out+1)%bufSz;
 		nfull--;
 		nempty++;
