@@ -1,6 +1,4 @@
-package BaseProdConso;
-
-import prodcons.v3.ProdConsBuffer;
+package prodcons.v3;
 
 public class Consommateur extends Thread {
 	private ProdConsBuffer buffer;

@@ -1,4 +1,4 @@
-package prodcons.v3;
+package prodcons.v1;
 
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;

@@ -1,6 +1,6 @@
-package BaseProdConso;
+package prodcons.v3;
 
-import prodcons.v3.ProdConsBuffer;
+import BaseProdConso.Message;
 
 public class Producteur extends Thread {
 	private ProdConsBuffer buffer;
