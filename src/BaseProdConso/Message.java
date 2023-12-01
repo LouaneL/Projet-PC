@@ -18,6 +18,6 @@ public class Message {
     }
     
     public String toString() {
-        return "Message " + id + " : " + message;
+        return message;
     }
 }

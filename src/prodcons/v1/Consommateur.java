@@ -12,12 +12,14 @@ public class Consommateur extends Thread {
 	}
 
 	public void run() {
-		try {
-			Thread.sleep(consTime);
-			Message m = buffer.get();
-			System.out.println("Consommateur " + this.getName() + " a consommé le message " + m);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		while (true) {
+			try {
+				Message m = buffer.get();
+				System.out.println("Consommateur" + " a consommé le message " + m);
+				Thread.sleep(consTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 	}
+}
 }

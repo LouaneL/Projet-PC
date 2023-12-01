@@ -1,4 +1,4 @@
-package prodcons.v1;
+package prodcons.v5;
 
 import BaseProdConso.Message;
 

@@ -1,4 +1,4 @@
-package prodcons.v3;
+package prodcons.v2;
 
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
@@ -29,6 +29,14 @@ public class TestProdCons {
 		for(int i = 0; i < nCons; i++) {
 			consommateurs[i] = new Consommateur(buffer, consTime);
 			consommateurs[i].start();
-		}	
+		}
+
+		for(int i = 0; i < nProd; i++) {
+			try {
+				producteurs[i].join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

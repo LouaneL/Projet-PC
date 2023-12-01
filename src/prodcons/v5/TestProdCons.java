@@ -1,4 +1,4 @@
-package prodcons.v3;
+package prodcons.v5;
 
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
@@ -16,6 +16,8 @@ public class TestProdCons {
 		int consTime = Integer.parseInt(prop.getProperty("consTime"));
 		int minProd = Integer.parseInt(prop.getProperty("minProd"));
 		int maxProd = Integer.parseInt(prop.getProperty("maxProd"));
+		int minCons = Integer.parseInt(prop.getProperty("minCons"));
+		int maxCons = Integer.parseInt(prop.getProperty("maxCons"));
 
 		ProdConsBuffer buffer = new ProdConsBuffer(bufSz);
 		Producteur[] producteurs = new Producteur[nProd];
@@ -27,8 +29,8 @@ public class TestProdCons {
 		}
 
 		for(int i = 0; i < nCons; i++) {
-			consommateurs[i] = new Consommateur(buffer, consTime);
+			consommateurs[i] = new Consommateur(buffer, consTime, minCons, maxCons);
 			consommateurs[i].start();
-		}	
+		}
 	}
 }

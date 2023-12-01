@@ -7,10 +7,16 @@ public class ProdConsBuffer extends prodcons.v1.ProdConsBuffer implements IProdC
 	public ProdConsBuffer(int bufSz) {
 		super(bufSz);
 	}
+	
+	@Override
+	public synchronized Message get() throws InterruptedException {
+		// TODO Auto-generated method stub
+		return get(1)[1];
+	}
 
 	@Override
-	public Message[] get(int k) throws InterruptedException {
-		Message[] tmp = null;
+	public synchronized Message[] get(int k) throws InterruptedException {
+		Message[] tmp = new Message[k];
 		int i = 0;
 		while (i < k) {
 			while (nfull <= 0) {

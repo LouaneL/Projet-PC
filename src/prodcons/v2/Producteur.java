@@ -1,4 +1,4 @@
-package prodcons.v1;
+package prodcons.v2;
 
 import BaseProdConso.Message;
 
@@ -24,7 +24,7 @@ public class Producteur extends Thread {
 		int nb = (int) (Math.random() * (maxProd - minProd) + minProd);
 		for(int i = 0; i < nb; i++) {
 			try {
-				System.out.println("Producteur " + this.getId() + " - produit n°" + i);
+				System.out.println("Producteur " + this.getId() + " - n°produit " + i);
 				buffer.put(new Message("Message " + i, i));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

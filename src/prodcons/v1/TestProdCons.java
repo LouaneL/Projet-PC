@@ -30,23 +30,5 @@ public class TestProdCons {
 			consommateurs[i] = new Consommateur(buffer, consTime);
 			consommateurs[i].start();
 		}
-
-		for(int i = 0; i < nProd; i++) {
-			try {
-				producteurs[i].join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		for(int i = 0; i < nCons; i++) {
-			try {
-				consommateurs[i].join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		System.out.println("Fin du programme");
 	}
 }

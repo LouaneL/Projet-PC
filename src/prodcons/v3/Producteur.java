@@ -24,7 +24,7 @@ public class Producteur extends Thread {
 		int nb = (int) (Math.random() * (maxProd - minProd) + minProd);
 		for(int i = 0; i < nb; i++) {
 			try {
-				System.out.println("Producteur " + this.getId() + " produit " + i);
+				System.out.println("Producteur " + this.getId() + " - produit n°" + i);
 				buffer.put(new Message("Message " + i, i));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
