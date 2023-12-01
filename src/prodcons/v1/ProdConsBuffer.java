@@ -24,12 +24,12 @@ import BaseProdConso.Message;
 */
 
 public class ProdConsBuffer implements IProdConsBuffer {
-	int nfull;
-	int nempty;
-	Message[] buffer;
-	int bufSz;
-	int in;
-	int out;
+	protected int nfull;
+	protected int nempty;
+	protected Message[] buffer;
+	protected int bufSz;
+	protected int in;
+	protected int out;
 
 	public ProdConsBuffer(int bufSz) {
 		this.nfull = 0;
@@ -52,6 +52,7 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		in = (in+1)%bufSz; 
 		nfull++;
 		nempty--;
+		notifyAll();
 	}
 
 	@Override
@@ -66,6 +67,7 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		out = (out+1)%bufSz;
 		nfull--;
 		nempty++;
+		notifyAll();
 		return tmp;
 	}
 
