@@ -1,47 +1,75 @@
 package prodcons.v6;
 
+import java.util.concurrent.Semaphore;
+
 import BaseProdConso.Message;
 
-public class ProdConsBuffer extends prodcons.v1.ProdConsBuffer implements IProdConsBufferMulti {
+public class ProdConsBuffer implements IProdConsBufferMulti {
+
+	private int bufSz;
+	private Message[] buffer;
+	private int nempty;
+	private int nfull;
+	private Semaphore empty;
+	private Semaphore full;
+	private int in;
+	private int out;
 
 	public ProdConsBuffer(int bufSz) {
-		super(bufSz);
+		this.bufSz = bufSz;
+		this.nempty = bufSz;
+		this.nfull = 0;
+		this.empty = new Semaphore(bufSz);
+		this.full = new Semaphore(0);
+		this.buffer = new Message[bufSz];
+		this.in = 0;
+		this.out = 0;
 	}
 
 	@Override
-	public synchronized void put(int k, Message m) throws InterruptedException {
-		while (k>0) {
-			while (nempty <= 0) {
-				try {
-					wait();
-				} catch (InterruptedException e) {
-				}
-			}
+	public void put(int k, Message m) throws InterruptedException {
+		empty.acquire(k);
+		synchronized (this) {
+			nempty -= k;
+		}
+		for (int i = 0; i < k; i++) {
 			buffer[in] = m;
-			in = (in+1)%bufSz; 
-			nfull++;
-			nempty--;
-			k--;
+			in = (in + 1) % bufSz;
 		}
-		notifyAll();
+		synchronized (this) {
+			nfull += k;
+		}
+		full.release(k);
 	}
-	
+
 	@Override
-	public synchronized Message get() throws InterruptedException {
-		while (nfull <= 0) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-			}
+	public int nmsg() {
+		return nempty;
+	}
+
+	@Override
+	public int totmsg() {
+		return nfull;
+	}
+
+	@Override
+	public void put(Message m) throws InterruptedException {
+	 	put(1, m);
+	}
+
+	@Override
+	public Message get() throws InterruptedException {
+		full.acquire();
+		synchronized (this) {
+			nfull--;
 		}
-		Message tmp = buffer[out];
-		out = (out+1)%bufSz;
-		nfull--;
-		nempty++;
-		try {
-			wait();
-		} catch (InterruptedException e) {}
-		return tmp;
+		Message m = buffer[out];
+		out = (out + 1) % bufSz;
+		synchronized (this) {
+			nempty++;
+		}
+		empty.release();
+		return m;
 	}
 
 }

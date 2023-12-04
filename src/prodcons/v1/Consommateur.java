@@ -20,6 +20,6 @@ public class Consommateur extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
 	}
-}
 }

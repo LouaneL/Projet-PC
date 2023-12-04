@@ -67,7 +67,9 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		out = (out+1)%bufSz;
 		nfull--;
 		nempty++;
-		notifyAll();
+		try {
+			wait();
+		} catch (InterruptedException e) {}
 		return tmp;
 	}
 
