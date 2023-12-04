@@ -57,6 +57,7 @@ public class ProdConsBuffer implements IProdConsBuffer {
 
 	@Override
 	public synchronized Message get() throws InterruptedException {
+		TestProdCons.prodDone++;
 		while (nfull <= 0) {
 			try {
 				wait();

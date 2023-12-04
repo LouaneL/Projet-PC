@@ -1,4 +1,4 @@
-package prodcons.v2;
+package prodcons.v6;
 
 import BaseProdConso.Message;
 
@@ -12,7 +12,7 @@ public class Consommateur extends Thread {
 	}
 
 	public void run() {
-		while (!TestProdCons.isProdDone()) {
+		while (true) {
 			try {
 				Message m = buffer.get();
 				System.out.println("Consommateur" + " a consommé le message " + m);
@@ -20,6 +20,6 @@ public class Consommateur extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
 	}
+}
 }

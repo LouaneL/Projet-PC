@@ -1,4 +1,4 @@
-package prodcons.v2;
+package prodcons.v6;
 
 import BaseProdConso.Message;
 
@@ -22,14 +22,14 @@ public class Producteur extends Thread {
 			e.printStackTrace();
 		}
 		int nb = (int) (Math.random() * (maxProd - minProd) + minProd);
-		for(int i = 0; i < nb; i++) {
-			try {
-				System.out.println("Producteur " + this.getId() + " - n°produit " + i);
-				buffer.put(new Message("Message " + i, i));
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			System.out.println("Producteur " + this.getId() + " - produit n x " + nb + "Message");
+			buffer.put(nb,new Message("Message x " + nb,nb));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+
 	}
 }

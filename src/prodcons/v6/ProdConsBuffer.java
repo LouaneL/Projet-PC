@@ -9,7 +9,7 @@ public class ProdConsBuffer extends prodcons.v1.ProdConsBuffer implements IProdC
 	}
 
 	@Override
-	public void put(int k, Message m) throws InterruptedException {
+	public synchronized void put(int k, Message m) throws InterruptedException {
 		while (k>0) {
 			while (nempty <= 0) {
 				try {
@@ -26,6 +26,7 @@ public class ProdConsBuffer extends prodcons.v1.ProdConsBuffer implements IProdC
 		notifyAll();
 	}
 	
+	@Override
 	public synchronized Message get() throws InterruptedException {
 		while (nfull <= 0) {
 			try {
