@@ -21,7 +21,6 @@ public class Consommateur extends Thread {
 				int nb = (int) (Math.random() * (maxCons - minCons) + minCons);
 				System.out.println("Essai de consommation de " + nb + " messages");
 				Message[] ms = buffer.get(nb);
-				for (Message m : ms) System.out.println("Consommateur" + " a consommé le message " + m);
 				Thread.sleep(consTime);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

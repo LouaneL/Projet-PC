@@ -25,11 +25,13 @@ public class ProdConsBuffer extends prodcons.v1.ProdConsBuffer implements IProdC
 				} catch (InterruptedException e) {}
 			}
 			tmp[i] = buffer[out];
+			System.out.println("Consommateur" + " a consommé le message " + out);
 			out = (out + 1) % bufSz;
 			i++;
 			nfull--;
 			nempty++;
 		}
+		notifyAll();
 		return tmp;
 	}
 
