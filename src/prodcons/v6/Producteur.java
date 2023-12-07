@@ -25,11 +25,10 @@ public class Producteur extends Thread {
 		try {
 			System.out.println("Producteur " + this.getId() + " - produit n x " + nb + "Message");
 			buffer.put(nb,new Message("Message x " + nb,nb));
+			System.out.println("Fin du Producteur " + this.getId());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 	}
 }

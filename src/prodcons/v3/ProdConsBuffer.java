@@ -45,7 +45,6 @@ public class ProdConsBuffer implements IProdConsBuffer{
 		mutex.release();
 		// one more not empty entry
 		vide.release();
-		
 		return m;
 	}
 
