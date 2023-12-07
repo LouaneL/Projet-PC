@@ -19,7 +19,7 @@ public class Consommateur extends Thread {
 		while (true) {
 			try {
 				int nb = (int) (Math.random() * (maxCons - minCons) + minCons);
-				System.out.println("Essai de consommation de " + nb + " messages");
+				System.out.println("Essai de consommation "+this.getId()+" de " + nb + " messages");
 				Message[] ms = buffer.get(nb);
 				Thread.sleep(consTime);
 			} catch (InterruptedException e) {
